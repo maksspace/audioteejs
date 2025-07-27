@@ -18,6 +18,8 @@ await audiotee.start()
 await audiotee.stop()
 ```
 
+Unless otherwise specified, AudioTee will capture system audio from all running processes.
+
 ## Installation
 
 `npm install audiotee`
@@ -40,11 +42,11 @@ interface AudioTeeOptions {
 
 ### Option details
 
-- **`sampleRate`**: Converts audio to the specified sample rate. Common values are `16000`, `22050`, `44100`, `48000`.
+- **`sampleRate`**: Converts audio to the specified sample rate. Common values are `16000`, `44100`, `48000`.
 - **`chunkDuration`**: Controls how frequently data events are emitted. Smaller values = more frequent events with smaller chunks
-- **`mute`**: When `true`, system audio is muted whilst AudioTee is capturing (useful for avoiding feedback)
-- **`includeProcesses`**: Array of process IDs to capture exclusively (all others filtered out)
-- **`excludeProcesses`**: Array of process IDs to filter out from capture
+- **`mute`**: When `true`, system audio is muted whilst AudioTee is capturing
+- **`includeProcesses`**: Array of process IDs to capture audio from (all others filtered out)
+- **`excludeProcesses`**: Array of process IDs to **exclude** from capture
 
 ## Events
 
