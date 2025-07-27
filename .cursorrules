@@ -123,6 +123,20 @@ interface AudioChunk {
 }
 ```
 
+### Log message structure
+
+All messages received via stderr **should** be a JSON payload as follows:
+
+```typescript
+interface LogMessage {
+  timestamp: Date
+  message_type: 'metadata' | 'stream_start' | 'stream_stop' | 'info' | 'error' | 'debug'
+  data: {
+    message: string
+  }
+}
+```
+
 ### Implementation Hints
 
 1. **Binary path resolution:**

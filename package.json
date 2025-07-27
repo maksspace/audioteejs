@@ -20,6 +20,9 @@
     "test": "vitest",
     "prepublishOnly": "npm run build"
   },
+  "os": [
+    "darwin"
+  ],
   "engines": {
     "node": ">=20"
   }
