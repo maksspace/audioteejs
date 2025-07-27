@@ -4,6 +4,7 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "license": "MIT",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -25,5 +26,10 @@
   ],
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
   }
 }
