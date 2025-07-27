@@ -1,6 +1,6 @@
-# AudioTeeJS
+# AudioTee.js
 
-AudioTeeJS exposes the macOS system audio capture functionality of the underlying [AudioTee](https://github.com/makeusabrew/audiotee) swift binary as a Node.js package:
+AudioTee.js exposes the system audio capture functionality of the underlying [AudioTee](https://github.com/makeusabrew/audiotee) macOS swift binary as a Node.js package:
 
 ```ts
 import { AudioTee } from 'audiotee'
@@ -11,11 +11,9 @@ audiotee.on('data', ({ data }) => {
   // data contains a raw PCM chunk of captured system audio
 })
 
-audiotee.start()
-
+await audiotee.start()
 // ... later
-
-audiotee.stop()
+await audiotee.stop()
 ```
 
 ## Installation
@@ -27,3 +25,11 @@ Installation will download a prebuilt universal macOS binary which will run on A
 ## Requirements
 
 - macOS >= 14.2
+
+## API stability
+
+Until a >= 1.x.x release, the API is unstable and subject to change without notice.
+
+## License
+
+The MIT license.
