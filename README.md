@@ -1,6 +1,6 @@
 # AudioTee.js
 
-AudioTee.js captures your Mac's system audio output and emits it in PCM encoded chunks at regular intervals. It is a tiny Node.js wrapper around the underlying [AudioTee](https://github.com/makeusabrew/audiotee) swift binary, which is bundled with the package distributed on npm.
+AudioTee.js captures your Mac's system audio output and emits it as PCM encoded chunks at regular intervals. It's a tiny Node.js wrapper around the underlying [AudioTee](https://github.com/makeusabrew/audiotee) swift binary, which is [./bin](bundled) in this repository and distributed with the package published to [npm](https://www.npmjs.com/package/audiotee).
 
 ## Basic usage
 
@@ -22,7 +22,7 @@ await audiotee.stop()
 
 `npm install audiotee`
 
-Installation will download a prebuilt universal macOS binary which runs on both Apple and Intel chips.
+Installation will download a prebuilt universal macOS binary which runs on both Apple and Intel chips, and weighs less than 600Kb.
 
 ## Options
 
@@ -91,13 +91,13 @@ audiotee.on('log', (message: string, level: LogLevel) => {
 
 ## API stability
 
-During the `0.x.x` release the API is unstable and subject to change without notice.
+During the `0.x.x` release, the API is unstable and subject to change without notice.
 
 ## Best practices
 
 - Always specify a sample rate. Tell AudioTee what you want, rather than having to parse the
   `metadata` message to see what you got by default
-- Specifying any sample rate automatically encodes using 16-bit signed integers, which is probably half the byte size compared to the 32-bit float your stream probably started with
+- Specifying _any_ sample rate automatically switches encoding to use 16-bit signed integers, which is half the byte size compared to the 32-bit float the stream probably uses natively
 - You'll probably need to specify a different `chunkDuration` depending on your use case. For example, some ASRs are quite particular about the exact length of each chunk they expect to process.
 
 ## License
