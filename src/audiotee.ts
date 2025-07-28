@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+// FIXME: not emitting start, stop, or any events really
 export class AudioTee {
   private events = new EventEmitter()
   private process: ChildProcess | null = null
