@@ -1,7 +1,10 @@
 import { spawn, ChildProcess } from 'child_process'
 import { EventEmitter } from 'events'
-import { join } from 'path'
+import path, { join } from 'path'
 import type { AudioTeeOptions, LogMessage, AudioTeeEvents } from './types.js'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export class AudioTee {
   private events = new EventEmitter()
