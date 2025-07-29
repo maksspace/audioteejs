@@ -9,25 +9,26 @@ This example demonstrates how to stream macOS system audio captured by AudioTee 
 3. **Displays live transcriptions** with partial results updating in real-time
 4. **Shows final formatted transcripts** when AssemblyAI detects end-of-turn
 
-Perfect for transcribing video calls, meetings, podcasts, or any audio playing through your Mac's speakers.
+It is no more than a quick proof of concept. It is **not** production ready.
 
 ## Setup
 
 1. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 2. **Get your AssemblyAI API key**:
+
    - Sign up at [AssemblyAI](https://www.assemblyai.com/)
    - Get your API key from the dashboard
 
 3. **Set your API key**:
+
    ```bash
    export ASSEMBLYAI_API_KEY="your-api-key-here"
    ```
-   
-   Or edit `index.ts` and replace `YOUR_API_KEY_HERE` with your actual key.
 
 ## Usage
 
@@ -36,6 +37,7 @@ npm start
 ```
 
 Or for development with auto-restart:
+
 ```bash
 npm run dev
 ```
@@ -46,15 +48,15 @@ npm run dev
 Starting AudioTee -> AssemblyAI Universal Streaming example
 Press Ctrl+C to stop
 
-🔗 Connecting to AssemblyAI...
-🎵 Starting system audio capture...
+Connecting to AssemblyAI...
+Starting system audio capture...
 
-🎙️  AssemblyAI session opened with ID: abc123...
-🎵 AudioTee started capturing system audio
+AssemblyAI session opened with ID: abc123...
+AudioTee started capturing system audio
 Listening for system audio...
 
 hello this is a test of the system  # <- partial transcript (updates in real-time)
-📝 Hello, this is a test of the system.  # <- final formatted transcript
+Hello, this is a test of the system.  # <- final formatted transcript
 ```
 
 ## Configuration
@@ -70,15 +72,14 @@ You can modify these settings in `index.ts`:
 
 ```typescript
 const audioTee = new AudioTee({
-  sampleRate: 16000,     // Audio sample rate
-  chunkDuration: 0.05,   // 50ms chunks
-  mute: false            // Set to true to mute speakers while capturing
+  sampleRate: 16000, // Audio sample rate
+  chunkDuration: 0.05, // 50ms chunks
 })
 
 const transcriber = client.streaming.transcriber({
   sampleRate: 16000,
-  formatTurns: true,     // Enable formatted final transcripts
-  encoding: 'pcm_s16le'
+  formatTurns: true, // Enable formatted final transcripts
+  encoding: 'pcm_s16le',
 })
 ```
 
@@ -89,15 +90,6 @@ const transcriber = client.streaming.transcriber({
 - AssemblyAI API key
 - System audio recording permissions (prompted on first run)
 
-## Tips
-
-- **Audio permissions**: The first run will prompt for microphone permissions in System Preferences
-- **Background audio**: Works great with any audio playing through your Mac - Zoom calls, YouTube videos, podcasts, etc.
-- **Process filtering**: You can modify AudioTee options to capture only specific applications using `includeProcesses` or `excludeProcesses`
-- **Muting**: Set `mute: true` in AudioTee options to silence your speakers while capturing (useful for avoiding feedback)
-
 ## Troubleshooting
 
-- **"Unauthorized"**: Check your AssemblyAI API key
 - **No audio detected**: Ensure something is playing audio on your Mac and that AudioTee has permission to access system audio
-- **Connection errors**: Verify your internet connection and that AssemblyAI's service is accessible
