@@ -43,7 +43,7 @@ interface AudioTeeOptions {
 ### Option details
 
 - **`sampleRate`**: Converts audio to the specified sample rate. Common values are `16000`, `44100`, `48000`.
-- **`chunkDuration`**: Controls how frequently data events are emitted. Smaller values = more frequent events with smaller chunks
+- **`chunkDuration`**: Controls how frequently data events are emitted. Smaller values = more frequent events with smaller chunks. Specified in seconds
 - **`mute`**: When `true`, system audio is muted whilst AudioTee is capturing
 - **`includeProcesses`**: Array of process IDs to capture audio from (all others filtered out)
 - **`excludeProcesses`**: Array of process IDs to **exclude** from capture
@@ -81,6 +81,8 @@ audiotee.on('log', (message: string, level: LogLevel) => {
 
 ### Event details
 
+Note: a bug in versions up to 0.0.2 means only the `data` lifecycle event is actually currently emitted.
+
 - **`data`**: Emitted for each audio chunk. The `data` property contains raw PCM audio bytes
 - **`start`**: Emitted when audio capture begins successfully
 - **`stop`**: Emitted when audio capture ends
@@ -98,7 +100,7 @@ During the `0.x.x` release, the API is unstable and subject to change without no
 ## Best practices
 
 - Always specify a sample rate. Tell AudioTee what you want, rather than having to parse the
-  `metadata` message to see what you got by default
+  `metadata` message to see what you got from the output device
 - Specifying _any_ sample rate automatically switches encoding to use 16-bit signed integers, which is half the byte size compared to the 32-bit float the stream probably uses natively
 - You'll probably need to specify a different `chunkDuration` depending on your use case. For example, some ASRs are quite particular about the exact length of each chunk they expect to process.
 
