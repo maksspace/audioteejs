@@ -106,4 +106,6 @@ During the `0.x.x` release, the API is unstable and subject to change without no
 
 ## License
 
-The MIT license.
+### The MIT License
+
+Copyright (C) 2025 Nick Payne.
