@@ -2,15 +2,19 @@
 
 AudioTee.js captures your Mac's system audio output and emits it as PCM encoded chunks at regular intervals. It's a tiny Node.js wrapper around the underlying [AudioTee](https://github.com/makeusabrew/audiotee) swift binary, which is [bundled](./bin) in this repository and distributed with the package published to [npm](https://www.npmjs.com/package/audiotee).
 
+## About
+
+[AudioTee](https://github.com/makeusabrew/audiotee) is a standalone swift binary which uses the [Core Audio taps](https://developer.apple.com/documentation/coreaudio/capturing-system-audio-with-core-audio-taps) API introduced in macOS 14.2 to 'tap' whatever's playing through your speakers and emit it to `stdout`. AudioTee.js spawns that binary as a child process and forwards stdout as `data` events.
+
 ## Basic usage
 
 ```ts
-import { AudioTee } from 'audiotee'
+import { AudioTee, AudioChunk } from 'audiotee'
 
 const audiotee = new AudioTee({ sampleRate: 16000 })
 
-audiotee.on('data', ({ data }) => {
-  // data contains a raw PCM chunk of captured system audio
+audiotee.on('data', (chunk: AudioChunk) => {
+  // chunk.data contains a raw PCM chunk of captured system audio
 })
 
 await audiotee.start()

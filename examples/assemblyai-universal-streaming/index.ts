@@ -1,4 +1,4 @@
-import { AudioTee } from '../../dist/index.js'
+import { AudioChunk, AudioTee } from '../../dist/index.js'
 import { AssemblyAI, TurnEvent } from 'assemblyai'
 
 // Replace with your actual AssemblyAI API key
@@ -75,9 +75,9 @@ async function run() {
   })
 
   // Pipe AudioTee data to AssemblyAI
-  audioTee.on('data', ({ data }: { data: Buffer }) => {
+  audioTee.on('data', (chunk: AudioChunk) => {
     // Send audio data to AssemblyAI for transcription
-    transcriber.sendAudio(data)
+    transcriber.sendAudio(chunk.data)
   })
 
   // Handle graceful shutdown
