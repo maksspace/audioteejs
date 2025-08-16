@@ -4,7 +4,13 @@ import path, { join } from 'path'
 import type { AudioTeeOptions, LogMessage, AudioTeeEvents } from './types.js'
 import { fileURLToPath } from 'url'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+let dirname: string
+
+if (typeof module === 'undefined' && typeof exports === 'undefined') {
+  dirname = path.dirname(fileURLToPath(import.meta.url))
+} else {
+  dirname = __dirname
+}
 
 // FIXME: not emitting start, stop, or any events really
 export class AudioTee {
@@ -64,6 +70,10 @@ export class AudioTee {
       args.push('--exclude-processes', ...this.options.excludeProcesses.map((p) => p.toString()))
     }
 
+    if (this.options.mic) {
+      args.push('--mic')
+    }
+
     return args
   }
 
@@ -97,7 +107,7 @@ export class AudioTee {
         return
       }
 
-      const binaryPath = join(__dirname, '..', 'bin', 'audiotee')
+      const binaryPath = join(dirname, '..', 'bin', 'audiotee')
       const args = this.buildArguments()
 
       this.process = spawn(binaryPath, args)
