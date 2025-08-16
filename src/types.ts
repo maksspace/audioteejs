@@ -2,6 +2,7 @@ export interface AudioTeeOptions {
   sampleRate?: number
   chunkDuration?: number
   mute?: boolean
+  mic?: boolean
   includeProcesses?: number[]
   excludeProcesses?: number[]
 }
